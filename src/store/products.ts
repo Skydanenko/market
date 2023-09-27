@@ -5,7 +5,7 @@ export default {
   },
   mutations: {
     setProducts(state: any, newProducts: [Record<string, unknown>]) {
-      state.allProducts = [...newProducts];
+      state.allProducts = [...newProducts]
     },
   },
-};
+}

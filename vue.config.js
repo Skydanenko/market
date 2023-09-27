@@ -2,19 +2,19 @@ module.exports = {
   configureWebpack: {
     optimization: {
       splitChunks: {
-        chunks: 'all',
+        chunks: "all",
         minSize: 0,
-        automaticNameDelimiter: '~',
+        automaticNameDelimiter: "~",
         enforceSizeThreshold: 10000,
         cacheGroups: {
           vendors: {
             test: /[\\/]node_modules[\\/]/,
             priority: -10,
-            reuseExistingChunk: true
-          }
-        }
-      }
-    }
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
   },
   css: {
     loaderOptions: {
@@ -23,8 +23,8 @@ module.exports = {
             @import "@/styles/_typography.scss";
             @import "@/styles/_colors.scss";
             @import "@/styles/common.scss";
-            `
-      }
-    }
-  }
+            `,
+      },
+    },
+  },
 }
