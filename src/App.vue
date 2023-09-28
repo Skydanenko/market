@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <nav class="nav">
-      <router-link class="nav__link" :to="{ name: 'Home' }">Home</router-link>
-      <router-link class="nav__link" :to="{ name: 'About' }">About</router-link>
+      <router-link class="nav__link" :to="{ name: 'Home' }"> Home </router-link>
+      <router-link class="nav__link" :to="{ name: 'Products' }">
+        Products
+      </router-link>
     </nav>
     <router-view />
   </div>
@@ -22,6 +24,8 @@ export default class App extends Vue {
 
 <style lang="scss">
 #app {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   background-color: #222;
   min-height: 100vh;
