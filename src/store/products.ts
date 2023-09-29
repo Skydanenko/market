@@ -1,18 +1,18 @@
-import { Goods } from "@/types/Goods";
+import { Product } from "@/types/Product";
 
 export default {
   namespaced: true,
   state: {
-    allProducts: [] as Goods[],
+    allProducts: [] as Product[],
   },
 
   mutations: {
-    setProducts(state: { allProducts: Goods[] }, newProducts: Goods[]) {
+    setProducts(state: { allProducts: Product[] }, newProducts: Product[]) {
       state.allProducts = [...newProducts];
     },
   },
 
   getters: {
-    getAllProducts: (state: { allProducts: Goods }) => state.allProducts,
+    getAllProducts: (state: { allProducts: Product }) => state.allProducts,
   },
 };
