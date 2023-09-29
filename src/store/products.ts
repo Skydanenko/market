@@ -1,11 +1,18 @@
+import { Product } from "@/types/Product";
+
 export default {
   namespaced: true,
   state: {
-    allProducts: [],
+    allProducts: [] as Product[],
   },
+
   mutations: {
-    setProducts(state: any, newProducts: [Record<string, unknown>]) {
-      state.allProducts = [...newProducts]
+    setProducts(state: { allProducts: Product[] }, newProducts: Product[]) {
+      state.allProducts = [...newProducts];
     },
   },
-}
+
+  getters: {
+    getAllProducts: (state: { allProducts: Product }) => state.allProducts,
+  },
+};
