@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    <nav class="nav">
-      <router-link class="nav__link" :to="{ name: 'Home' }"> Home </router-link>
-      <router-link class="nav__link" :to="{ name: 'Products' }">
-        Products
-      </router-link>
-    </nav>
+    <Header />
     <router-view />
   </div>
 </template>
@@ -13,13 +8,12 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { getAllProducts } from "./api/mainRequests";
+import Header from "@/components/Header.vue";
 
-@Component
-export default class App extends Vue {
-  mounted(): void {
-    getAllProducts();
-  }
-}
+@Component({
+  components: { Header },
+})
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">
@@ -31,26 +25,5 @@ export default class App extends Vue {
   min-height: 100vh;
   color: #fff;
   font-family: $font-family-default;
-}
-
-.nav {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  padding: 30px;
-
-  &__link {
-    font-weight: bold;
-    color: #f8fcff;
-    text-decoration: none;
-
-    &:hover {
-      opacity: 0.6;
-    }
-
-    &.router-link-exact-active {
-      color: #ffe81e;
-    }
-  }
 }
 </style>

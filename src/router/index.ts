@@ -6,14 +6,19 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
   },
   {
-    path: "/Products",
+    path: "/products",
     name: "Products",
     component: () => import("@/views/Products.vue"),
+  },
+  {
+    path: "/:name",
+    name: "ProductContentPage",
+    component: () => import("@/views/ProductContentPage.vue"),
   },
 ];
 
