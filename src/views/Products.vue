@@ -4,6 +4,7 @@
       v-for="product in allProducts"
       class="products__item"
       :key="product.id"
+      @click="setCurrentProduct(product.id, product.title)"
     >
       <div class="products-header">
         <h3 class="products-header__title">{{ product.title }}</h3>
@@ -26,16 +27,29 @@
 <script lang="ts">
 import { Product } from "@/types/Product";
 import { Component, Vue } from "vue-property-decorator";
+import { getAllProducts } from "@/api/mainRequests";
 
-@Component({
-  components: {},
-  computed: {
-    allProducts(): Product[] {
-      return this.$store.getters["products/getAllProducts"];
-    },
-  },
-})
-export default class Products extends Vue {}
+@Component
+export default class Products extends Vue {
+  get allProducts(): Product[] {
+    return this.$store.getters["products/getAllProducts"];
+  }
+
+  setCurrentProduct(id: number, name: string): void {
+    const formattedName = name.toLowerCase().replace(/\s+/g, "-");
+
+    this.$store.commit("products/setCurrentProduct", id);
+
+    this.$router.push({
+      name: "ProductContentPage",
+      params: { name: formattedName },
+    });
+  }
+
+  mounted(): void {
+    getAllProducts();
+  }
+}
 </script>
 
 <style lang="scss">

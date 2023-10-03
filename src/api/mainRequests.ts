@@ -5,7 +5,6 @@ export const getAllProducts = async (): Promise<void> => {
   const smartphonesResponse = await instanceApi.get(
     "products/category/smartphones"
   );
-
   const laptopsResponse = await instanceApi.get("products/category/laptops");
 
   const neededProducts = [
