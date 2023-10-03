@@ -3,14 +3,13 @@
     <div class="product__images">
       <img class="product__image" :src="currentProduct.images[0]" alt="image" />
     </div>
-    <div class="product-info">
-      <div class="product-info-header">
-        <h3 class="product-info-header__title">{{ currentProduct.title }}</h3>
-        <div class="product-info-header__price">
+    <div class="product__info">
+      <div class="product-header">
+        <h3 class="product-header__title">{{ currentProduct.title }}</h3>
+        <div class="product-header__price">
           <span class="price price_full">
             Full price {{ currentProduct.price }}$
           </span>
-
           <span class="discount"
             >- {{ this.currentProduct.discountPercentage }}%
 
@@ -18,22 +17,21 @@
               >You saving {{ discountInCash.toFixed(2) }}$</span
             >
           </span>
-
           <span class="price"> = {{ currentProductPrice.toFixed(2) }}$</span>
         </div>
       </div>
-      <div class="product-info-body">{{ currentProduct.description }}</div>
-      <div class="product-info-footer">
-        <span class="product-info-footer__item"
+      <div class="product-body">{{ currentProduct.description }}</div>
+      <div class="product-footer">
+        <span class="product-footer__item"
           >Category: {{ currentProduct.category }}</span
         >
-        <span class="product-info-footer__item"
+        <span class="product-footer__item"
           >Brand: {{ currentProduct.brand }}</span
         >
-        <span class="product-info-footer__item"
+        <span class="product-footer__item"
           >Rating: {{ currentProduct.rating }}</span
         >
-        <span class="product-info-footer__item">
+        <span class="product-footer__item">
           Stock: {{ currentProduct.stock }}
         </span>
       </div>
@@ -77,49 +75,49 @@ export default class ProductContentPage extends Vue {
   justify-content: center;
   gap: 40px;
 
-  .product__images {
+  &__images {
     border-radius: 20px;
     overflow: hidden;
     max-height: 360px;
     width: auto;
   }
 
-  .product__image {
+  &__image {
     object-fit: contain;
     object-position: center;
   }
 
-  &-info {
+  &__info {
     display: flex;
     flex-direction: column;
     text-align: left;
     width: 50%;
     background-color: rgba(255, 155, 255, 0.1);
     border-radius: 20px;
+  }
 
-    &-header {
-      display: flex;
-      justify-content: space-between;
-      padding: 16px;
-      border-bottom: 1px solid #fff;
-    }
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #fff;
+  }
 
-    &-body {
-      padding: 16px;
-      flex-grow: 1;
-      border-bottom: 1px solid #fff;
-    }
+  &-body {
+    padding: 16px;
+    flex-grow: 1;
+    border-bottom: 1px solid #fff;
+  }
 
-    &-footer {
-      display: flex;
-      gap: 16px;
-      padding: 16px;
+  &-footer {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
 
-      &__item {
-        background-color: #222;
-        border-radius: 20px;
-        padding: 8px;
-      }
+    &__item {
+      background-color: #222;
+      border-radius: 20px;
+      padding: 8px;
     }
   }
 

@@ -1,14 +1,16 @@
 <template>
-  <nav class="nav">
-    <router-link
-      v-for="route in routes"
-      :key="route.name"
-      :class="['nav__link', { nav__link_active: isActiveLink(route.path) }]"
-      :to="{ name: route.name }"
-    >
-      {{ route.name }}
-    </router-link>
-  </nav>
+  <header class="header">
+    <nav class="nav">
+      <router-link
+        v-for="route in routes"
+        :key="route.name"
+        :class="['nav__link', { nav__link_active: isActiveLink(route.path) }]"
+        :to="{ name: route.name }"
+      >
+        {{ route.name }}
+      </router-link>
+    </nav>
+  </header>
 </template>
 
 <script lang="ts">
