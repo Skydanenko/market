@@ -1,22 +1,18 @@
 <template>
-  <div class="products">
+  <div class="products-page">
     <div
       v-for="product in allProducts"
-      class="products__item"
+      class="products-page__item"
       :key="product.id"
       @click="setCurrentProduct(product.id, product.title)"
     >
-      <div class="products-header">
-        <h3 class="products-header__title">{{ product.title }}</h3>
-        <p class="products-header__rating">Ціна: {{ product.price }}</p>
+      <div class="products-page-header">
+        <h3 class="products-page-header__title">{{ product.title }}</h3>
+        <p class="products-page-header__rating">Ціна: {{ product.price }}</p>
       </div>
-      <section class="products-body">
-        <img
-          class="products-body__thumbnail"
-          :src="product.thumbnail"
-          alt="poster"
-        />
-        <p class="products-body__description">
+      <section class="products-page-body">
+        <img class="products-page-body__thumbnail" :src="product.thumbnail" alt="poster" />
+        <p class="products-page-body__description">
           {{ product.description }}
         </p>
       </section>
@@ -25,35 +21,35 @@
 </template>
 
 <script lang="ts">
-import { Product } from "@/types/Product";
-import { Component, Vue } from "vue-property-decorator";
-import { getAllProducts } from "@/api/mainRequests";
+import { Product } from '@/types/Product'
+import { Component, Vue } from 'vue-property-decorator'
+import { getAllProducts } from '@/api/mainRequests'
 
 @Component
-export default class Products extends Vue {
+export default class ProductsPage extends Vue {
   get allProducts(): Product[] {
-    return this.$store.getters["products/getAllProducts"];
+    return this.$store.getters['products/getAllProducts']
   }
 
   setCurrentProduct(id: number, name: string): void {
-    const formattedName = name.toLowerCase().replace(/\s+/g, "-");
+    const formattedName = name.toLowerCase().replace(/\s+/g, '-')
 
-    this.$store.commit("products/setCurrentProduct", id);
+    this.$store.commit('products/setCurrentProduct', id)
 
     this.$router.push({
-      name: "ProductContentPage",
+      name: 'ProductContentPage',
       params: { name: formattedName },
-    });
+    })
   }
 
   mounted(): void {
-    getAllProducts();
+    getAllProducts()
   }
 }
 </script>
 
 <style lang="scss">
-.products {
+.products-page {
   align-self: center;
   display: flex;
   justify-content: center;
@@ -85,7 +81,7 @@ export default class Products extends Vue {
     min-height: 320px;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
