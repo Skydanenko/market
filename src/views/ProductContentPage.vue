@@ -1,12 +1,12 @@
 <template>
-  <div class="product">
-    <div class="product__images">
-      <img class="product__image" :src="currentProduct.images[0]" alt="image" />
+  <div class="product-content-page">
+    <div class="product-content-page__images">
+      <img class="product-content-page__image" :src="currentProduct.images[0]" alt="image" />
     </div>
-    <div class="product__info">
-      <div class="product-header">
-        <h3 class="product-header__title">{{ currentProduct.title }}</h3>
-        <div class="product-header__price">
+    <div class="product-content-page__info">
+      <div class="product-content-page-header">
+        <h3 class="product-content-page-header__title">{{ currentProduct.title }}</h3>
+        <div class="product-content-page-header__price">
           <span class="price price_full"> Full price {{ currentProduct.price }}$ </span>
           <span class="discount">
             - {{ this.currentProduct.discountPercentage }}%
@@ -15,12 +15,12 @@
           <span class="price"> = {{ currentProductPrice.toFixed(2) }}$</span>
         </div>
       </div>
-      <div class="product-body">{{ currentProduct.description }}</div>
-      <div class="product-footer">
-        <span class="product-footer__item">Category: {{ currentProduct.category }}</span>
-        <span class="product-footer__item">Brand: {{ currentProduct.brand }}</span>
-        <span class="product-footer__item">Rating: {{ currentProduct.rating }}</span>
-        <span class="product-footer__item"> Stock: {{ currentProduct.stock }} </span>
+      <div class="product-content-page-body">{{ currentProduct.description }}</div>
+      <div class="product-content-page-footer">
+        <span class="product-content-page-footer__item">Category: {{ currentProduct.category }}</span>
+        <span class="product-content-page-footer__item">Brand: {{ currentProduct.brand }}</span>
+        <span class="product-content-page-footer__item">Rating: {{ currentProduct.rating }}</span>
+        <span class="product-content-page-footer__item"> Stock: {{ currentProduct.stock }} </span>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@ export default class ProductContentPage extends Vue {
 </script>
 
 <style lang="scss">
-.product {
+.product-content-page {
   display: flex;
   justify-content: center;
   gap: 40px;

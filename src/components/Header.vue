@@ -43,10 +43,8 @@ export default class Header extends Vue {
       titleName: 'Products',
     },
   ]
-  name = ''
 
   onSignUp(): void {
-    console.log('click')
     this.$router.push({
       name: 'SignUpPage',
     })

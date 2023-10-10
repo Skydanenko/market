@@ -1,8 +1,8 @@
 <template>
   <div class="login-page">
-    <BaseInput :label="nameLabel" />
-    <BaseInput :type="passwordType" :label="passwordLabel" />
-    <BaseButton :buttonText="buttonText" />
+    <BaseInput :label="'Name'" />
+    <BaseInput :type="'password'" :label="'Password'" />
+    <BaseButton :buttonText="'Submit'" />
   </div>
 </template>
 
@@ -17,10 +17,5 @@ import BaseButton from '@/components/baseComponents/BaseButton.vue'
     BaseInput,
   },
 })
-export default class LoginPage extends Vue {
-  @Prop({ default: 'password' }) passwordType!: string
-  buttonText = 'Submit'
-  passwordLabel = 'Password'
-  nameLabel = 'Name'
-}
+export default class LoginPage extends Vue {}
 </script>
