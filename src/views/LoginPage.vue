@@ -1,8 +1,8 @@
 <template>
   <div class="login-page">
-    <BaseInput :label="'Name'" />
-    <BaseInput :type="'password'" :label="'Password'" />
-    <BaseButton :buttonText="'Submit'" />
+    <BaseInput label="Name" />
+    <BaseInput type="password" label="Password" />
+    <BaseButton buttonText="Submit" />
   </div>
 </template>
 

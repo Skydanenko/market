@@ -9,7 +9,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class BaseButton extends Vue {
-  @Prop({ default: 'Sign In' }) buttonText!: string
+  @Prop() buttonText!: string
 }
 </script>
 

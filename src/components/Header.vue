@@ -15,9 +15,7 @@
           {{ route.titleName }}
         </router-link>
       </nav>
-      <router-link :to="{ name: 'LoginPage' }">
-        <BaseButton @click="onSignUp" />
-      </router-link>
+      <BaseButton buttonText="Login" @click.native="onLogin" />
     </div>
   </header>
 </template>
@@ -44,9 +42,11 @@ export default class Header extends Vue {
     },
   ]
 
-  onSignUp(): void {
+  onLogin(): void {
+    if (this.$route.name === 'LoginPage') return
+
     this.$router.push({
-      name: 'SignUpPage',
+      name: 'LoginPage',
     })
   }
 }
