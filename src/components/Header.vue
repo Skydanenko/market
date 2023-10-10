@@ -1,41 +1,75 @@
 <template>
   <header class="header">
-    <nav class="nav">
-      <router-link
-        v-for="route in routes"
-        :key="route.name"
-        :class="['nav__link', { nav__link_active: isActiveLink(route.path) }]"
-        :to="{ name: route.name }"
-      >
-        {{ route.name }}
+    <div class="header__inner">
+      <router-link :to="{ name: 'HomePage' }" class="logo">
+        <img src="" alt="logo" class="logo__img" />
       </router-link>
-    </nav>
+      <nav class="nav">
+        <router-link
+          v-for="route in routes"
+          :key="route.name"
+          class="nav__link"
+          :to="{ name: route.name }"
+          active-class="nav__link_active"
+        >
+          {{ route.titleName }}
+        </router-link>
+      </nav>
+      <router-link :to="{ name: 'LoginPage' }">
+        <BaseButton @click="onSignUp" />
+      </router-link>
+    </div>
   </header>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator'
+import BaseInput from '@/components/baseComponents/BaseInput.vue'
+import BaseButton from '@/components/baseComponents/BaseButton.vue'
 
-@Component
+@Component({
+  components: { BaseButton, BaseInput },
+})
 export default class Header extends Vue {
   routes = [
     {
-      path: "/home",
-      name: "Home",
+      path: '/home',
+      name: 'HomePage',
+      titleName: 'Home',
     },
     {
-      path: "/products",
-      name: "Products",
+      path: '/products',
+      name: 'ProductsPage',
+      titleName: 'Products',
     },
-  ];
+  ]
+  name = ''
 
-  isActiveLink(linkName: string): boolean {
-    return this.$route.path.includes(linkName);
+  onSignUp(): void {
+    console.log('click')
+    this.$router.push({
+      name: 'SignUpPage',
+    })
   }
 }
 </script>
 
 <style lang="scss">
+.header {
+  box-shadow: 0 0 12px 0 #ffe81e;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    width: calc(100% - 32px);
+  }
+}
+
 .nav {
   display: flex;
   justify-content: center;
