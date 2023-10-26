@@ -23,7 +23,7 @@
 <script lang="ts">
 import { Product } from '@/types/Product'
 import { Component, Vue } from 'vue-property-decorator'
-import { getAllProducts } from '@/api/mainRequests'
+import { getAllProducts } from '@/api/productsRequest'
 
 @Component
 export default class ProductsPage extends Vue {
