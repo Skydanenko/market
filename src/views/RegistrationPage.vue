@@ -1,21 +1,21 @@
 <template>
   <div class="registration-page">
     <template>
-      <h2>Login Page</h2>
+      <h2>Registration page</h2>
       <BaseInput v-model="email" label="Email" />
       <BaseInput v-model="password" type="password" label="Password" />
-      <BaseButton buttonText="login" @click.native="login()" />
+      <BaseButton buttonText="Submit" @click.native="registration" />
 
-      {{ messageResponse }}
+      <p>{{ responseMessage }}</p>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import BaseInput from '@/components/baseComponents/BaseInput.vue'
 import BaseButton from '@/components/baseComponents/BaseButton.vue'
-import { login } from '@/api/auth'
+import { registration } from '@/api/auth'
 
 @Component({
   components: {
@@ -23,26 +23,18 @@ import { login } from '@/api/auth'
     BaseInput,
   },
 })
-export default class LoginPage extends Vue {
+export default class RegistrationPage extends Vue {
   email = ''
   password = ''
 
-  messageResponse = ''
+  responseMessage = ''
 
   get loggedUser(): any {
     return this.$store.getters['user/getLoggedUser']
   }
 
-  delay(): ReturnType<typeof setTimeout> {
-    return setTimeout(() => {
-      // Порожній коментар, щоб уникнути помилки
-    }, 1000)
-  }
-
-  async login(): Promise<void> {
-    this.messageResponse = await login({ email: this.email, password: this.password })
-
-    this.delay()
+  async registration(): Promise<void> {
+    this.responseMessage = await registration({ email: this.email, password: this.password })
 
     if (this.loggedUser.isAuthenticated) {
       await this.$router.push({

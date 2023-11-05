@@ -2,6 +2,7 @@
   <div class="product-content-page">
     <div class="product-content-page__images">
       <img class="product-content-page__image" :src="currentProduct.images[0]" alt="image" />
+      <BaseButton button-text="Add to cart" @click.native="addToCart" />
     </div>
     <div class="product-content-page__info">
       <div class="product-content-page-header">
@@ -29,8 +30,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { Product } from '@/types/Product'
+import BaseButton from '@/components/baseComponents/BaseButton.vue'
 
-@Component
+@Component({
+  components: { BaseButton },
+})
 export default class ProductContentPage extends Vue {
   get currentProduct(): Product {
     return this.$store.state.products.currentProduct
@@ -47,6 +51,10 @@ export default class ProductContentPage extends Vue {
       return this.currentProduct.price
     }
   }
+
+  addToCart(): void {
+    this.$store.commit('cart/addToCart', this.currentProduct)
+  }
 }
 </script>
 
@@ -58,7 +66,6 @@ export default class ProductContentPage extends Vue {
 
   &__images {
     border-radius: 20px;
-    overflow: hidden;
     max-height: 360px;
     width: auto;
   }

@@ -1,37 +1,24 @@
 export default {
   namespaced: true,
   state: {
-    id: null,
-    username: '',
+    isAuthenticated: false,
+    uid: null,
     email: '',
-    firstName: '',
-    lastName: '',
-    gender: '',
-    image: '',
-    token: '',
-    password: '',
   },
 
   mutations: {
     setUser(state: any, newUser: any) {
-      const { id, username, email, firstName, lastName, gender, image, token } = newUser
+      const { uid, email } = newUser
 
-      state.id = id
-      state.username = username
+      state.isAuthenticated = true
+      state.uid = uid
       state.email = email
-      state.firstName = firstName
-      state.lastName = lastName
-      state.gender = gender
-      state.image = image
-      state.token = token
     },
 
-    setUsername(state: any, newUsername: string) {
-      state.username = newUsername
-    },
-
-    setPassword(state: any, newPassword: string) {
-      state.password = newPassword
+    clearUser(state: any) {
+      state.isAuthenticated = false
+      state.uid = null
+      state.email = ''
     },
   },
 
@@ -39,3 +26,8 @@ export default {
     getLoggedUser: (state: any) => state,
   },
 }
+
+/*1)
+ запит на логАут і кнопка лог Аут.
+2) Запит Логін і захід знову на сайт.
+*/
