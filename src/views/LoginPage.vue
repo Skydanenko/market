@@ -1,15 +1,12 @@
 <template>
-  <div class="registration-page">
-    <template>
-      <h2>Login Page</h2>
-      <BaseInput v-model="email" label="Email" />
-      <BaseInput v-model="password" type="password" label="Password" />
-      <BaseButton buttonText="login" @click.native="login()" />
-
-      <p v-if="messageResponse.length > 0">
-        {{ messageResponse }}
-      </p>
-    </template>
+  <div class="login-page">
+    <h2>Login Page</h2>
+    <BaseInput v-model="email" label="Email" />
+    <BaseInput v-model="password" type="password" label="Password" />
+    <BaseButton buttonText="login" @click.native="login()" />
+    <p v-if="messageResponse">
+      {{ messageResponse }}
+    </p>
   </div>
 </template>
 
@@ -28,7 +25,6 @@ import { login } from '@/api/auth'
 export default class LoginPage extends Vue {
   email = ''
   password = ''
-
   messageResponse = ''
 
   get loggedUser(): any {
@@ -52,7 +48,7 @@ export default class LoginPage extends Vue {
     await this.delay()
 
     if (this.loggedUser.isAuthenticated) {
-      await this.$router.push({
+      this.$router.push({
         name: 'HomePage',
       })
     }

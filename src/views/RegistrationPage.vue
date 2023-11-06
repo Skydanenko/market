@@ -1,13 +1,11 @@
 <template>
   <div class="registration-page">
-    <template>
-      <h2>Registration page</h2>
-      <BaseInput v-model="email" label="Email" />
-      <BaseInput v-model="password" type="password" label="Password" />
-      <BaseButton buttonText="Submit" @click.native="registration" />
+    <h2>Registration page</h2>
+    <BaseInput v-model="email" label="Email" />
+    <BaseInput v-model="password" type="password" label="Password" />
+    <BaseButton buttonText="Submit" @click.native="registration" />
 
-      <p>{{ responseMessage }}</p>
-    </template>
+    <p>{{ responseMessage }}</p>
   </div>
 </template>
 
@@ -26,7 +24,6 @@ import { registration } from '@/api/auth'
 export default class RegistrationPage extends Vue {
   email = ''
   password = ''
-
   responseMessage = ''
 
   get loggedUser(): any {

@@ -1,5 +1,6 @@
 import store from '@/store'
 import { createUserWithEmailAndPassword, getAuth, signOut, signInWithEmailAndPassword } from 'firebase/auth'
+import user from '@/store/user'
 
 type User = {
   email: string
@@ -9,10 +10,9 @@ type User = {
 export const login = async (payload: User): Promise<string> => {
   const auth = getAuth()
   try {
-    const userResponse = await signInWithEmailAndPassword(auth, payload.email, payload.password)
-    const loggedUser = { ...userResponse.user }
+    const userResponse = (await signInWithEmailAndPassword(auth, payload.email, payload.password)).user
 
-    store.commit('user/setUser', loggedUser)
+    store.commit('user/setUser', userResponse)
 
     return 'successful login'
   } catch (error: any) {
@@ -23,10 +23,9 @@ export const login = async (payload: User): Promise<string> => {
 export const registration = async (payload: User): Promise<string> => {
   const auth = getAuth()
   try {
-    const userResponse = await createUserWithEmailAndPassword(auth, payload.email, payload.password)
-    const loggedUser = { ...userResponse.user }
+    const userResponse = (await createUserWithEmailAndPassword(auth, payload.email, payload.password)).user
 
-    store.commit('user/setUser', loggedUser)
+    store.commit('user/setUser', userResponse)
 
     return 'successful registration'
   } catch (error: any) {

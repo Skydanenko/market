@@ -73,11 +73,11 @@ export default class Header extends Vue {
   }
 
   async onLogout(): Promise<void> {
-    const responseLogout = await logout()
+    await logout()
     this.$store.commit('user/clearUser')
 
     if (!this.$store.state.user.isAuthenticated) {
-      await this.$router.push({
+      this.$router.push({
         name: 'LoginPage',
       })
     }
