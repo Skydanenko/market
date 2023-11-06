@@ -1,14 +1,12 @@
 <template>
   <div class="login-page">
-    <template v-if="!isWelcomeGreeting">
-      <BaseInput v-model="username" label="Username" />
-      <BaseInput v-model="password" type="password" label="Password" />
-      <BaseButton buttonText="Submit" @click.native="onLogin" />
-    </template>
-
-    <template v-if="isWelcomeGreeting">
-      <div class="greeting-message">{{ `welcome back ${loggedUser.firstName}` }}</div>
-    </template>
+    <h2>Login Page</h2>
+    <BaseInput v-model="email" label="Email" />
+    <BaseInput v-model="password" type="password" label="Password" />
+    <BaseButton buttonText="login" @click.native="login()" />
+    <p v-if="messageResponse">
+      {{ messageResponse }}
+    </p>
   </div>
 </template>
 
@@ -18,16 +16,6 @@ import BaseInput from '@/components/baseComponents/BaseInput.vue'
 import BaseButton from '@/components/baseComponents/BaseButton.vue'
 import { login } from '@/api/auth'
 
-type userData = {
-  id: null
-  email: ''
-  firstName: ''
-  lastName: ''
-  gender: ''
-  image: ''
-  token: ''
-}
-
 @Component({
   components: {
     BaseButton,
@@ -35,33 +23,34 @@ type userData = {
   },
 })
 export default class LoginPage extends Vue {
-  isWelcomeGreeting = false
+  email = ''
+  password = ''
+  messageResponse = ''
 
-  get loggedUser(): userData {
+  get loggedUser(): any {
     return this.$store.getters['user/getLoggedUser']
   }
 
-  get username(): string {
-    return this.$store.state.user.username
+  async delay(): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, 4000)
+    })
   }
 
-  set username(value: string) {
-    this.$store.commit('user/setUsername', value)
-  }
+  async login(): Promise<void> {
+    const messageResponse = await login({ email: this.email, password: this.password })
 
-  get password(): string {
-    return this.$store.state.user.password
-  }
+    if (messageResponse) {
+      this.messageResponse = messageResponse
+    }
+    await this.delay()
 
-  set password(value: string) {
-    this.$store.commit('user/setPassword', value)
-  }
-
-  async onLogin(): Promise<void> {
-    await login({ username: this.username, password: this.password })
-
-    if (this.loggedUser.token) {
-      this.isWelcomeGreeting = true
+    if (this.loggedUser.isAuthenticated) {
+      this.$router.push({
+        name: 'HomePage',
+      })
     }
   }
 }

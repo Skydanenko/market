@@ -15,7 +15,11 @@
           {{ route.titleName }}
         </router-link>
       </nav>
-      <BaseButton buttonText="Login" @click.native="onLogin" />
+      <div class="button-section">
+        <BaseButton v-if="!loggedUser.isAuthenticated" buttonText="Registration" @click.native="onRegistration" />
+        <BaseButton v-if="!loggedUser.isAuthenticated" button-text="Login" @click.native="onLogin" />
+        <BaseButton v-if="loggedUser.isAuthenticated" button-text="Logout" @click.native="onLogout" />
+      </div>
     </div>
   </header>
 </template>
@@ -24,6 +28,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import BaseInput from '@/components/baseComponents/BaseInput.vue'
 import BaseButton from '@/components/baseComponents/BaseButton.vue'
+import { logout } from '@/api/auth'
 
 @Component({
   components: { BaseButton, BaseInput },
@@ -40,7 +45,24 @@ export default class Header extends Vue {
       name: 'ProductsPage',
       titleName: 'Products',
     },
+    {
+      path: '/cart',
+      name: 'CartPage',
+      titleName: 'Cart',
+    },
   ]
+
+  get loggedUser(): any {
+    return this.$store.getters['user/getLoggedUser']
+  }
+
+  onRegistration(): void {
+    if (this.$route.name === 'RegistrationPage') return
+
+    this.$router.push({
+      name: 'RegistrationPage',
+    })
+  }
 
   onLogin(): void {
     if (this.$route.name === 'LoginPage') return
@@ -48,6 +70,17 @@ export default class Header extends Vue {
     this.$router.push({
       name: 'LoginPage',
     })
+  }
+
+  async onLogout(): Promise<void> {
+    await logout()
+    this.$store.commit('user/clearUser')
+
+    if (!this.$store.state.user.isAuthenticated) {
+      this.$router.push({
+        name: 'LoginPage',
+      })
+    }
   }
 }
 </script>
@@ -87,5 +120,10 @@ export default class Header extends Vue {
       color: #ffe81e;
     }
   }
+}
+
+.button-section {
+  display: flex;
+  gap: 8px;
 }
 </style>
