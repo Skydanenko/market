@@ -57,7 +57,7 @@ export default class Header extends Vue {
   }
 
   onRegistration(): void {
-    if (this.$route.name === 'RegistrationPage.vue') return
+    if (this.$route.name === 'RegistrationPage') return
 
     this.$router.push({
       name: 'RegistrationPage',
@@ -65,7 +65,7 @@ export default class Header extends Vue {
   }
 
   onLogin(): void {
-    if (this.$route.name === 'LoginPage.vue') return
+    if (this.$route.name === 'LoginPage') return
 
     this.$router.push({
       name: 'LoginPage',

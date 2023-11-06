@@ -6,7 +6,9 @@
       <BaseInput v-model="password" type="password" label="Password" />
       <BaseButton buttonText="login" @click.native="login()" />
 
-      {{ messageResponse }}
+      <p v-if="messageResponse.length > 0">
+        {{ messageResponse }}
+      </p>
     </template>
   </div>
 </template>
@@ -33,16 +35,21 @@ export default class LoginPage extends Vue {
     return this.$store.getters['user/getLoggedUser']
   }
 
-  delay(): ReturnType<typeof setTimeout> {
-    return setTimeout(() => {
-      // Порожній коментар, щоб уникнути помилки
-    }, 1000)
+  async delay(): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, 4000)
+    })
   }
 
   async login(): Promise<void> {
-    this.messageResponse = await login({ email: this.email, password: this.password })
+    const messageResponse = await login({ email: this.email, password: this.password })
 
-    this.delay()
+    if (messageResponse) {
+      this.messageResponse = messageResponse
+    }
+    await this.delay()
 
     if (this.loggedUser.isAuthenticated) {
       await this.$router.push({
