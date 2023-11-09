@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import BaseInput from '@/components/baseComponents/BaseInput.vue'
 import BaseButton from '@/components/baseComponents/BaseButton.vue'
 import { registration } from '@/api/auth'
