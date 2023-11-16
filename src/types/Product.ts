@@ -10,4 +10,5 @@ export type Product = {
   stock: number
   thumbnail: number
   title: string
+  count?: number
 }
